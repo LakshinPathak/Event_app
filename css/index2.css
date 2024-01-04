@@ -1,0 +1,104 @@
+html {
+  background: #FFA6A6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+header {
+  top: 10px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+body {
+  background: transparent;
+}
+
+.container {
+  background: #FF3131;
+  width: 800px;
+  height: 300px;
+  border-radius: 10px;
+  box-shadow: 0px 7px 31px -2px rgba(0, 0, 0, 0.75);
+  overflow: visible;
+  position: relative;
+}
+
+.container input {
+  background: #fff;
+}
+
+.input__label-content {
+  color: #fff;
+}
+
+.input {
+  z-index: 666;
+}
+.input:nth-child(2), .input:nth-child(3) {
+  opacity: 0;
+}
+.input:nth-child(3) {
+  top: -140px;
+}
+
+.fa-thumbs-up {
+  transform: scaleX(-1);
+  position: absolute;
+  right: -100%;
+  font-size: 3.5rem;
+  padding-top: 10px;
+  opacity: 0;
+}
+
+.input-1 {
+  background: #EC0505;
+}
+.input-1 .fa {
+  color: #EC0505;
+}
+.input-1 input {
+  color: #EC0505;
+}
+
+.input-2 {
+  background: #EC6E05;
+}
+.input-2 .fa {
+  color: #EC6E05;
+}
+.input-2 input {
+  color: #EC6E05;
+}
+
+.input-3 {
+  background: #04BC04;
+}
+.input-3 .fa {
+  color: #04BC04;
+}
+.input-3 input {
+  color: #04BC04;
+}
+
+.thanks {
+  font-size: 3rem;
+  position: relative;
+  left: -260px;
+  top: 170px;
+  color: #fff;
+  z-index: 420;
+  opacity: 0;
+}
+
+.fa-heart {
+  font-size: 3rem;
+  position: relative;
+  right: -550px;
+  top: 170px;
+  z-index: 200;
+  opacity: 0;
+  color: #fff;
+}

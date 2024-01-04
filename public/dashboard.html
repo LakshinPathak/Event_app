@@ -1,0 +1,440 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Management Dashboard</title>
+    <!-- Add Bootstrap CSS link -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .dashboard-container {
+            padding: 50px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+            max-width: 800px;
+        }
+
+        h2 {
+            color: #3498db;
+        }
+
+        p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .user-info {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
+        .user-info a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .user-info a:hover {
+            text-decoration: underline;
+        }
+
+        /* Navigation Bar Styles */
+        .navbar {
+            background-color: #3498db;
+            border-radius: 0;
+        }
+
+        .navbar-brand,
+        .navbar-nav .nav-link {
+            color: #fff;
+        }
+
+        .navbar-brand:hover,
+        .navbar-nav .nav-link:hover {
+            color: #f8f9fa;
+        }
+
+        /* Event List Styles */
+        .event-list {
+            margin-top: 30px;
+        }
+
+        .event-item {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            background-color: #f8f9fa;
+        }
+    </style>
+</head>
+
+<body>
+    <marquee>After First Event Registration users are requested to refresh the dasboard again!!!! </marquee> 
+    <marquee>For Deleting Last Event Registered users are requested to logout once and login again!!!! </marquee> 
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="#">Event Dashboard</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="events.html">Events</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="eventsupdate.html">Update Events</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="settings.html">Settings</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/index.html">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Dashboard Content -->
+    <div class="dashboard-container">
+        <div class="user-info" id="user-info"></div>
+        <h2>Welcome to the Event Management Dashboard</h2>
+        <p>This is where you can manage your events and activities.</p>
+    
+        <h2>Recently Registered Event:</h2>
+        <div id="dashboard-event-details">
+    
+        <table class="table" id="event-table-body">
+            <thead>
+                <tr>
+                    <th>Event Name</th>
+                    <th>Event Details</th>
+                    <th>Event Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <!-- Table content will be dynamically added here -->
+        </table>
+
+    </div>
+</div>
+    
+
+
+    
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+ 
+    const urlParams = new URLSearchParams(window.location.search);
+    const isScript1 = urlParams.get("script1") === "true";
+    const isScript2 = urlParams.get("script2") === "true";
+    const isScript3 = urlParams.get("script3") === "true";
+        
+    if (isScript1)
+     {
+        console.log('hajsk');
+        const eventName = urlParams.get("eventName");
+        const eventDetails = urlParams.get("eventDetails");
+        const eventDate = urlParams.get("eventDate");
+        const loggedInUser = sessionStorage.getItem("loggedInUser") || urlParams.get("ffusername");
+       // document.getElementById('user-info').innerHTML = `Logged in as: <a href="#">${loggedInUser}</a>`;
+       
+        addEventToDatabase(eventName, eventDetails, eventDate,loggedInUser);
+    }
+    //var k=1;
+    if(isScript2)
+    {
+        //k=0;
+       // fusername
+        const ff_user = urlParams.get("ffusername");
+        const f_email = urlParams.get("femail");
+        const f_pass = urlParams.get("fpassword");
+        console.log("hahahahah123");
+        console.log(sessionStorage.getItem("loggedInUser"));
+        console.log("hi hello!!!");
+        
+       
+     //   document.getElementById('user-info').innerHTML = `Logged in as: <a href="#">${f_user}</a>`;
+   
+    }
+    if(isScript3)
+    {
+        const e_name = urlParams.get("n_eventName");
+        const e_date = urlParams.get("n_eventDate");
+        const e_details = urlParams.get("n_eventDetails");
+        const loggedInUser = sessionStorage.getItem("loggedInUser")
+        console.log("kkk");
+        console.log(sessionStorage.getItem("loggedInUser"));
+
+        console.log(e_name+ " "+e_date+ " "+e_details);
+       // console.log('hii');
+       
+        updateevent(e_name,e_details,e_date,loggedInUser);
+    }
+ 
+        displayEntireTable();
+
+      
+            const loggedInUser =  sessionStorage.getItem("loggedInUser") || urlParams.get("ffusername") ;
+            console.log(loggedInUser);
+            document.getElementById('user-info').innerHTML = `Logged in as: <a href="#">${loggedInUser}</a>`;
+   
+
+    
+    
+});
+
+
+
+async  function updateevent(eventName, n_eventDetails, n_eventDate,n_loggedInUser)
+    {
+
+        try {
+            console.log(eventName+"pathakkkkk"+n_eventDetails+n_eventDate);
+        // Perform AJAX request to the server settings endpoint
+        const response = await fetch('/updateevent', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ username: n_loggedInUser,eventDetails: n_eventDetails,eventDate: n_eventDate,eventName: eventName }),
+        });
+  
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+  
+        const result = await response.json();
+  
+        console.log('Response from server:', result);
+  
+        // Handle success or error response from the server
+        if (result.success) {
+          console.log('Settings update successful!');
+          alert(result.message);
+  
+          // Redirect to the dashboard after saving settings
+          window.location.href = '/dashboard.html'; // Adjust the path accordingly
+        } else {
+          // Settings update failed, display an error message or take appropriate action
+          console.error('Settings update failed:', result.message);
+          alert(result.message);
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        // Handle errors here
+        alert('An unexpected error occurred. Please try again later.');
+      }
+    }
+
+
+    
+    function deleteEvent(eventName, loggedInUser) {
+        console.log("Deleting event:", eventName, loggedInUser);
+    deleteEventFromDatabase(eventName, loggedInUser);
+ 
+}
+
+
+
+    function addEventToDatabase(eventName, eventDetails, eventDate,loggedInUser) {
+
+        fetch('/addEvent', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                eventName,
+                eventDetails,
+                eventDate,
+                loggedInUser,
+            }),
+        })
+        .then(response => response.json())
+        .then(data => {
+ 
+            console.log(data);
+            const tableBody = document.getElementById('event-table-body');
+            tableBody.innerHTML='';
+            displayEntireTable();
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+
+        
+    }
+
+
+    function display_Table(events) {
+
+    //    console.log("lakshin12345")
+
+        console.log(events);
+
+        if (events && events.length > 0 && Array.isArray(events)) {
+                console.log("hiii");
+        }
+        else{
+      //      console.log("hiii2");
+            document.getElementById('dashboard-event-details').innerHTML = `
+        <h2>No events registered yet.</h2>
+    `;
+        }
+
+  
+    const tableBody = document.getElementById('event-table-body');
+    
+        tableBody.innerHTML=`<thead>
+                <tr>
+                    <th>Event Name</th>
+                    <th>Event Details</th>
+                    <th>Event Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>`;
+       // document.getElementById('event-table-body').innerHTML = ``;
+
+
+
+    if (events && Array.isArray(events) && events.length>0 ) {
+      
+console.log(events);
+
+        events.forEach(event => {
+
+
+            const row = tableBody.insertRow();
+            const cell1 = row.insertCell(0);
+            const cell2 = row.insertCell(1);
+            const cell3 = row.insertCell(2);
+
+            cell1.textContent = event.eventName;
+            cell2.textContent = event.eventDetails;
+            cell3.textContent = event.eventDate;
+
+            // Add a delete button with an onclick event
+            
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Delete';
+            deleteButton.className = 'btn btn-danger btn-sm';
+
+
+            deleteButton.onclick = function () {
+                //console.log("pathak12345");
+                deleteEvent(event.eventName, event.loggedInUser);
+
+                // window.location.reload(true);
+
+              };
+
+            const cell4 = row.insertCell(3);
+            cell4.appendChild(deleteButton);
+
+            
+            // const updateButton = document.createElement('button');
+            // updateButton.textContent = 'Update';
+            // updateButton.className = 'btn btn-danger btn-sm';
+            // const cell5= row.insertCell(4);
+            // cell5.appendChild(updateButton);
+
+        });
+
+      
+    } 
+    else
+     {
+     
+        document.getElementById('dashboard-event-details').innerHTML = `
+            <h2>No events registered yet.</h2>
+        `;
+    }
+}
+
+
+    function deleteEventFromDatabase(eventName, loggedInUser) {
+    fetch('/deleteEvent', {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            eventName,
+            loggedInUser,
+        }),
+    })
+    .then(response => response.json())
+    .then( data => {
+        
+        console.log(data);
+        if (data.success) {
+            console.log("pathak12");
+            console.log(data);
+            const tableBody = document.getElementById('event-table-body');
+            tableBody.innerHTML='';
+            displayEntireTable();
+              // display_Table(data); // Update the displayed table
+        }
+        
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+
+
+
+
+
+
+
+
+
+function displayEntireTable() {
+
+const loggedInUser = sessionStorage.getItem("loggedInUser");
+//const urlParams = new URLSearchParams(window.location.search);
+//const loggedInUser = urlParams.get("ffusername");
+
+console.log("pathak");
+fetch(`/getAllEvents?loggedInUser=${loggedInUser}`)
+    .then(response => response.json())
+    .then(data => {
+        console.log(loggedInUser);
+        console.log(data);
+        console.log("mishra");
+        display_Table(data);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+    </script>
+
+</body>
+
+</html>
